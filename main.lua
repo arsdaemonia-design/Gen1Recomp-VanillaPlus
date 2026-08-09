@@ -210,6 +210,7 @@ return function(mod)
                 { "jump", "end" },
 
                 { "label", "vanilla_shop" },
+                { "show_text", "TEXT_VIRIDIANMART_CLERK" },
                 { "open_mart", "TEXT_VIRIDIANMART_CLERK" },
                 { "label", "end" },
             },

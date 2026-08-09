@@ -1,0 +1,18 @@
+return {
+  summary   = "Expansión en desarrollo. Actualmente incluye la misión de los Zapatos Robados.",
+  author    = "Aldo",
+  tags      = { "story", "quests", "vanilla-plus", "in-development" },
+  differences = {
+    changed = {
+      "MapScripts de VIRIDIAN_MART y ROUTE_2"
+    },
+    added = {
+      "Misión secundaria: Zapatos Robados (Running Shoes)",
+      "Nuevos NPCs (Víctima y Ladrón)",
+      "Nuevos textos en inglés y español"
+    },
+    known = {}
+  },
+  credits   = {},
+  compat    = { engine = ">=0.0.0-dev <2.0.0", modApi = 2 },
+}

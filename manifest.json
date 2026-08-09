@@ -1,0 +1,19 @@
+{
+  "id": "vanilla-plus",
+  "name": "Vanilla+",
+  "version": "0.1.0",
+  "api": 2,
+  "entry": "main.lua",
+  "profile": "content",
+  "game_version": ">=0.0.0-dev <1.0.0",
+  "category": "QUEST",
+  "priority": 100,
+  "permissions": ["engine_internals"],
+  "dependencies": [],
+  "optional_dependencies": [],
+  "conflicts": [],
+  "incompatible": [],
+  "experimental": false,
+  "description": "Proyecto en crecimiento para expandir la historia. Actualmente incluye la misión de los Zapatos Robados.",
+  "github": "arsdaemonia-design/Gen1Recomp-VanillaPlus"
+}

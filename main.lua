@@ -162,20 +162,20 @@ return function(mod)
                 -- El estado de la mision tiene prioridad sobre el flujo
                 -- vanilla del Parcel. Asi el tendero no reinicia la escena
                 -- si la partida no trae exactamente la misma flag vanilla.
-                { "check_flag", "mod:running_shoes.completed" },
+                { "check_flag", "MOD_RUNNING_SHOES_completed" },
                 { "jump_if_true", "vanilla_shop" },
                 -- Estado separado: la escena de entrada solo puede ejecutarse
 
-                { "check_flag", "mod:running_shoes.scene_started" },
+                { "check_flag", "MOD_RUNNING_SHOES_scene_started" },
                 { "jump_if_true", "vanilla_shop" },
-                { "check_flag", "mod:running_shoes.quest_started" },
+                { "check_flag", "MOD_RUNNING_SHOES_quest_started" },
                 { "jump_if_true", "vanilla_shop" },
                 { "check_flag", "EVENT_OAK_GOT_PARCEL" },
                 { "jump_if_false", "vanilla_parcel" },
 
                 -- Reservar el estado antes de cualquier movimiento o texto.
-                { "set_flag", "mod:running_shoes.scene_started" },
-                { "set_flag", "mod:running_shoes.quest_started" },
+                { "set_flag", "MOD_RUNNING_SHOES_scene_started" },
+                { "set_flag", "MOD_RUNNING_SHOES_quest_started" },
                 { "show_object", "VIRIDIAN_MART", "RUNNING_SHOES_VICTIM" },
                 { "show_object", "ROUTE_2", "RUNNING_SHOES_THIEF_NPC" },
                 { "place_npc", 4, 3, 7, "up" },
@@ -217,7 +217,7 @@ return function(mod)
 
             -- 5. Víctima: recibe el objeto y entrega la recompensa
             TEXT_RUNNING_SHOES_VICTIM = {
-                { "check_flag", "mod:running_shoes.completed" },
+                { "check_flag", "MOD_RUNNING_SHOES_completed" },
                 { "jump_if_true", "completed" },
                 { "check_item", "RUNNING_SHOES_STOLEN" },
                 { "jump_if_false", "missing" },
@@ -226,7 +226,7 @@ return function(mod)
                 -- bug; la mision solo debe consumir esa recompensa una vez.
                 { "take_item", "RUNNING_SHOES_STOLEN", 99 },
                 { "give_item", "RUNNING_SHOES", 1 },
-                { "set_flag", "mod:running_shoes.completed" },
+                { "set_flag", "MOD_RUNNING_SHOES_completed" },
                 { "show_text", "_RunningShoesCompleted" },
                 { "jump", "end" },
 
@@ -250,14 +250,14 @@ return function(mod)
                 { "jump_if_true", "already_defeated" },
                 { "check_item", "RUNNING_SHOES_STOLEN" },
                 { "jump_if_true", "already_defeated" },
-                { "check_flag", "mod:running_shoes.thief_defeated" },
+                { "check_flag", "MOD_RUNNING_SHOES_thief_defeated" },
                 { "jump_if_true", "already_defeated" },
                 { "show_text", "_RunningShoesThiefIntro" },
                 { "start_battle", "trainer", "RUNNING_SHOES_THIEF", 1 },
 
                 -- Es obligatorio proteger la recompensa con este salto.
                 { "jump_if_false", "battle_failed" },
-                { "set_flag", "mod:running_shoes.thief_defeated" },
+                { "set_flag", "MOD_RUNNING_SHOES_thief_defeated" },
                 { "give_item", "RUNNING_SHOES_STOLEN", 1 },
                 { "show_text", "_RunningShoesBattleWon" },
                 { "jump", "end" },
@@ -279,7 +279,7 @@ return function(mod)
         end
 
         local flags = ctx.save and ctx.save.flags or {}
-        local unlocked = flags["mod:running_shoes.completed"]
+        local unlocked = flags["MOD_RUNNING_SHOES_completed"]
         local holdingB = ctx.input
             and ctx.input.isDown
             and ctx.input:isDown("b")

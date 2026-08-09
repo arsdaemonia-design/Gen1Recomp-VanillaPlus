@@ -153,12 +153,25 @@ return function(mod)
     mod.content.map_scripts:register("VIRIDIAN_MART", {
         talk = {
             TEXT_VIRIDIANMART_CLERK = {
+                -- El item final es la fuente de verdad mas robusta: si el
+                -- jugador ya tiene RUNNING_SHOES, el tendero vuelve siempre
+                -- a su flujo normal, aunque una partida antigua no conserve
+                -- correctamente la flag mod:*.
                 { "check_item", "RUNNING_SHOES" },
-                { "jump_if_true", "vanilla_start" },
+                { "jump_if_true", "vanilla_shop" },
+                -- El estado de la mision tiene prioridad sobre el flujo
+                -- vanilla del Parcel. Asi el tendero no reinicia la escena
+                -- si la partida no trae exactamente la misma flag vanilla.
                 { "check_flag", "mod:running_shoes.completed" },
-                { "jump_if_true", "vanilla_start" },
+                { "jump_if_true", "vanilla_shop" },
+                -- Estado separado: la escena de entrada solo puede ejecutarse
+
                 { "check_flag", "mod:running_shoes.scene_started" },
-                { "jump_if_true", "vanilla_start" },
+                { "jump_if_true", "vanilla_shop" },
+                { "check_flag", "mod:running_shoes.quest_started" },
+                { "jump_if_true", "vanilla_shop" },
+                { "check_flag", "EVENT_OAK_GOT_PARCEL" },
+                { "jump_if_false", "vanilla_parcel" },
 
                 -- Reservar el estado antes de cualquier movimiento o texto.
                 { "set_flag", "mod:running_shoes.scene_started" },
@@ -169,26 +182,24 @@ return function(mod)
                 { "move_npc", 4, "up", 3 },
                 { "face_object", 4, "left" },
                 { "face_player_dir", "right" },
-                
+                -- Desde este punto el tendero queda desbloqueado: el niño
+                -- ya entro en escena aunque el jugador rechace la ayuda.
                 { "show_text", "_RunningShoesSceneIntro" },
                 { "show_text", "_RunningShoesSceneDetails" },
                 { "ask", "_RunningShoesAskHelp" },
                 { "jump_if_false", "declined" },
                 { "show_text", "_RunningShoesVictimWaiting" },
-                { "jump", "end" },
+                { "jump", "vanilla_shop" },
 
                 { "label", "declined" },
                 { "show_text", "_RunningShoesDeclined" },
-                { "jump", "end" },
+                { "jump", "vanilla_shop" },
 
-                { "label", "vanilla_start" },
-                { "check_flag", "EVENT_OAK_GOT_PARCEL" },
-                { "jump_if_true", "vanilla_shop" },
+                { "label", "vanilla_parcel" },
                 { "check_flag", "EVENT_GOT_OAKS_PARCEL" },
                 { "jump_if_true", "parcel_waiting" },
                 { "check_flag", "EVENT_GOT_STARTER" },
                 { "jump_if_false", "vanilla_shop" },
-                
                 { "show_text", "TEXT_VIRIDIANMART_CLERK" },
                 { "give_item", "OAKS_PARCEL", 1 },
                 { "set_flag", "EVENT_GOT_OAKS_PARCEL" },

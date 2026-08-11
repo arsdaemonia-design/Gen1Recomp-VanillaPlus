@@ -186,8 +186,7 @@ return function(mod)
 
     mod.content.text:register(
         "_BulbaPewterHint",
-        "Have you seen a girl looking for her BULBASAUR?\n" ..
-        "She looked really worried."
+        "Have you seen a\ngirl looking for\vher BULBASAUR?\fShe looked\nreally worried."
     )
 
     mod.content.text:register(
@@ -197,103 +196,153 @@ return function(mod)
 
     mod.content.text:register(
         "_BulbaOwnerIntro2",
-        "Oh, I was so foolish! I lost my BULBASAUR...\n" ..
-        "I tried to train it, but I was way too hard on it."
+        "Oh, I was so\n" ..
+        "foolish!\v" ..
+        "I lost my\n" ..
+        "BULBASAUR...\v" ..
+        "I tried to train\n" ..
+        "it, but I was way\n" ..
+        "too hard on it."
     )
 
     mod.content.text:register(
         "_BulbaOwnerIntro3",
-        "It got scared and ran away!\n" ..
-        "I think it fled south, into the VIRIDIAN FOREST."
+        "It got scared\n" ..
+        "and ran away!\v" ..
+        "It fled south,\n" ..
+        "into the VIRIDIAN\n" ..
+        "FOREST."
     )
 
     mod.content.text:register(
         "_BulbaOwnerIntro4",
-        "If you find him... please, help him."
+        "If you find him...\n" ..
+        "please, help him."
     )
 
     mod.content.text:register(
         "_BulbaOwnerWaiting",
-        "Please look for him in the VIRIDIAN FOREST!\n" ..
-        "He must be so scared..."
+        "Please, look for\n" ..
+        "him in the\n" ..
+        "VIRIDIAN FOREST!\v" ..
+        "He must be so\n" ..
+        "scared..."
     )
 
     mod.content.text:register(
         "_BulbaOwnerCaught",
-        "Is that BULBASAUR with you?!\n" ..
-        "Oh... he looks so happy by your side...\n\n" ..
-        "Maybe I am not the trainer he needs.\n" ..
-        "Please... keep him!"
+        "Is that BULBASAUR\n" ..
+        "with you?!\v" ..
+        "Oh... he looks so\n" ..
+        "happy by your side\f" ..
+        "Maybe I am not\n" ..
+        "the trainer he\n" ..
+        "needs.\v" ..
+        "Please...\n" ..
+        "keep him!"
     )
 
     mod.content.text:register(
         "_BulbaOwnerDone",
-        "I'll look for a POKéMON that fits my style better.\n" ..
-        "Thank you so much!"
+        "I'll look for a\n" ..
+        "POKéMON that fits\n" ..
+        "my style better.\v" ..
+        "Thank you so\n" ..
+        "much!"
     )
 
     mod.content.text:register(
         "_BulbaRival1Talk",
-        "Liam: Are you looking for that BULBASAUR?\n" ..
-        "I saw him first! Let's battle!"
+        "Liam: Are you\n" ..
+        "looking for that\n" ..
+        "BULBASAUR?\v" ..
+        "I saw him first!\n" ..
+        "Let's battle!"
     )
 
     mod.content.text:register(
         "_BulbaRival1Won",
-        "Liam: Awww, you're too strong!\n" ..
-        "It went further north..."
+        "Liam: Awww,\n" ..
+        "you're too strong!\v" ..
+        "It went further\n" ..
+        "north..."
     )
 
     mod.content.text:register(
         "_BulbaRival2Talk",
-        "Lorenzo: Don't even think about stealing\n" ..
-        "my friend's BULBASAUR!"
+        "Lorenzo: Don't\n" ..
+        "even think about\n" ..
+        "stealing\v" ..
+        "my friend's\n" ..
+        "BULBASAUR!"
     )
 
     mod.content.text:register(
         "_BulbaRival2Won",
-        "Lorenzo: Ouch! Okay, okay, you win!\n" ..
-        "He's hidden near the northeastern clear."
+        "Lorenzo: Ouch!\n" ..
+        "Okay, okay!\v" ..
+        "You win!\v" ..
+        "He's hidden near\n" ..
+        "the northeastern\n" ..
+        "clear."
     )
 
     mod.content.text:register(
         "_BulbaRival3Talk",
-        "Oliver: Hey, have you seen a frightened little POKéMON?\n" ..
-        "I think it went that way, but Nico is tracking it too."
+        "Oliver: Hey,\n" ..
+        "have you seen a\n" ..
+        "frightened little\n" ..
+        "POKéMON?\v" ..
+        "I think it went\n" ..
+        "that way. Nico is\n" ..
+        "tracking it too."
     )
 
     mod.content.text:register(
         "_BulbaRival3Won",
-        "Oliver: Ouch!\n" ..
-        "I think it went that way, but Nico is tracking it too."
+        "Oliver: Ouch!\v" ..
+        "I think it went\n" ..
+        "that way. Nico is\n" ..
+        "tracking it too."
     )
 
     mod.content.text:register(
         "_BulbaFinalTalk",
-        "Nico: Hey! Back off!\n" ..
-        "This rare POKéMON is mine!"
+        "Nico: Hey!\n" ..
+        "Back off!\v" ..
+        "This rare POKéMON\n" ..
+        "is mine!"
     )
 
     mod.content.text:register(
         "_BulbaFinalWon",
-        "Nico: No way! I'm out of here!"
+        "Nico: No way!\n" ..
+        "I'm out of here!"
     )
 
     mod.content.text:register(
         "_BulbaWildScared",
-        "BULBASAUR is hiding behind a bush.\n" ..
-        "It looks too scared to approach while that trainer is around."
+        "BULBASAUR is\n" ..
+        "hiding behind a\n" ..
+        "bush.\v" ..
+        "It looks too\n" ..
+        "scared to approach\n" ..
+        "while that trainer\n" ..
+        "is around."
     )
 
     mod.content.text:register(
         "_BulbaWildCalm",
-        "BULBASAUR looks calmed down now..."
+        "BULBASAUR looks\n" ..
+        "calmed down now..."
     )
 
     mod.content.text:register(
         "_BulbaWildDefeated",
-        "BULBASAUR was defeated!\n" ..
-        "It fled deeper into the forest..."
+        "BULBASAUR was\n" ..
+        "defeated!\v" ..
+        "It fled deeper\n" ..
+        "into the forest..."
     )
 
     -- =========================================================================
@@ -317,78 +366,128 @@ return function(mod)
         end
 
         text._BulbaPewterHint =
-            "¿Has visto a una chica buscando a su BULBASAUR?\n" ..
-            "Parecía bastante preocupada."
+            "¿Has visto a una\n" ..
+            "chica buscando a\v" ..
+            "su BULBASAUR?\f" ..
+            "Parecía bastante\n" ..
+            "preocupada."
 
         text._BulbaOwnerIntro1 =
             "¡Espera!"
 
         text._BulbaOwnerIntro2 =
-            "¡Ay, soy una tonta! Perdí a mi BULBASAUR...\n" ..
-            "Intenté entrenarlo, pero fui demasiado dura con él."
+            "¡Ay, soy una\n" ..
+            "tonta!\v" ..
+            "Perdí a mi\n" ..
+            "BULBASAUR...\v" ..
+            "Intenté entrenarlo,\n" ..
+            "pero fui muy dura\n" ..
+            "con él."
 
         text._BulbaOwnerIntro3 =
-            "¡Se asustó y salió corriendo!\n" ..
-            "Creo que huyó hacia el sur, hacia el BOSQUE VERDE."
+            "¡Se asustó y\n" ..
+            "salió corriendo!\v" ..
+            "Huyó hacia el sur,\n" ..
+            "hacia el BOSQUE\n" ..
+            "VERDE."
 
         text._BulbaOwnerIntro4 =
-            "Si lo encuentras... por favor, ayúdalo."
+            "Si lo encuentras...\n" ..
+            "por favor, ayúdalo."
 
         text._BulbaOwnerWaiting =
-            "¡Por favor, búscalo en el BOSQUE VERDE!\n" ..
-            "¡Debe estar tan asustado!..."
+            "¡Por favor,\n" ..
+            "búscalo en el\n" ..
+            "BOSQUE VERDE!\v" ..
+            "¡Debe estar tan\n" ..
+            "asustado!..."
 
         text._BulbaOwnerCaught =
-            "¡¿Ese BULBASAUR está contigo?!\n" ..
-            "Oh... se ve tan feliz a tu lado...\n\n" ..
-            "Quizá yo no soy la entrenadora que necesita.\n" ..
-            "Por favor... ¡quédate con él!"
+            "¡¿Ese BULBASAUR\n" ..
+            "está contigo?!\v" ..
+            "Oh... se ve tan\n" ..
+            "feliz a tu lado.\f" ..
+            "Quizá yo no soy\n" ..
+            "la entrenadora que\n" ..
+            "necesita.\v" ..
+            "Por favor...\n" ..
+            "¡quédate con él!"
 
         text._BulbaOwnerDone =
-            "Buscaré un POKéMON que se adapte mejor a mi estilo.\n" ..
+            "Buscaré un POKéMON\n" ..
+            "que se adapte mejor\n" ..
+            "a mi estilo.\v" ..
             "¡Muchas gracias!"
 
         text._BulbaRival1Talk =
-            "Liam: ¿Estás buscando a ese BULBASAUR?\n" ..
-            "¡Yo lo vi primero! ¡A combatir!"
+            "Liam: ¿Estás\n" ..
+            "buscando a ese\n" ..
+            "BULBASAUR?\v" ..
+            "¡Yo lo vi primero!\n" ..
+            "¡A combatir!"
 
         text._BulbaRival1Won =
-            "Liam: ¡Ugh, eres muy fuerte!\n" ..
-            "Cruzó hacia el norte..."
+            "Liam: ¡Ugh,\n" ..
+            "eres muy fuerte!\v" ..
+            "Cruzó hacia\n" ..
+            "el norte..."
 
         text._BulbaRival2Talk =
-            "Lorenzo: Ni se te ocurra robar\n" ..
-            "el BULBASAUR de mi amiga."
+            "Lorenzo: Ni se te\n" ..
+            "ocurra robar\n" ..
+            "el BULBASAUR de\n" ..
+            "mi amiga."
 
         text._BulbaRival2Won =
-            "Lorenzo: ¡Auch! ¡Vale, vale, ganas!\n" ..
-            "Está escondido cerca del claro del noreste."
+            "Lorenzo: ¡Auch!\n" ..
+            "¡Vale, vale, ganas!\v" ..
+            "Está escondido cerca\n" ..
+            "del claro del\n" ..
+            "noreste."
 
         text._BulbaRival3Talk =
-            "Oliver: Oye, ¿no has visto a un POKéMON asustadito?\n" ..
-            "Creo que fue por ahí, pero Nico lo está siguiendo."
+            "Oliver: Oye, ¿no has\n" ..
+            "visto a un POKéMON\n" ..
+            "asustadito?\v" ..
+            "Creo que fue por ahí,\n" ..
+            "pero Nico lo está\n" ..
+            "siguiendo."
 
         text._BulbaRival3Won =
-            "Oliver: ¡Auch!\n" ..
-            "Creo que fue por ahí, pero Nico lo está siguiendo."
+            "Oliver: ¡Auch!\v" ..
+            "Creo que fue por ahí,\n" ..
+            "pero Nico lo está\n" ..
+            "siguiendo."
 
         text._BulbaFinalTalk =
-            "Nico: ¡Oye! ¡Aléjate!\n" ..
-            "¡Este POKéMON raro es mío!"
+            "Nico: ¡Oye!\n" ..
+            "¡Aléjate!\v" ..
+            "¡Este POKéMON raro\n" ..
+            "es mío!"
 
         text._BulbaFinalWon =
-            "Nico: ¡No puede ser! ¡Me largo de aquí!"
+            "Nico: ¡No puede ser!\n" ..
+            "¡Me largo de aquí!"
 
         text._BulbaWildScared =
-            "BULBASAUR está escondido detrás de un arbusto.\n" ..
-            "Parece demasiado asustado para acercarse mientras ese entrenador siga aquí."
+            "BULBASAUR está\n" ..
+            "escondido detrás\n" ..
+            "de un arbusto.\v" ..
+            "Parece demasiado\n" ..
+            "asustado para\n" ..
+            "acercarse mientras\n" ..
+            "ese entrenador siga\n" ..
+            "aquí."
 
         text._BulbaWildCalm =
-            "BULBASAUR parece más tranquilo ahora..."
+            "BULBASAUR parece\n" ..
+            "más tranquilo ahora..."
 
         text._BulbaWildDefeated =
-            "¡BULBASAUR ha sido derrotado!\n" ..
-            "Huyó hacia lo más profundo del bosque..."
+            "¡BULBASAUR ha sido\n" ..
+            "derrotado!\v" ..
+            "Huyó hacia lo más\n" ..
+            "profundo del bosque..."
     end)
 
     -- =========================================================================

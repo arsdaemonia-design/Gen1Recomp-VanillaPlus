@@ -261,7 +261,7 @@ return function(mod)
                 { "show_text", "_RunningShoesThiefIntro" },
                 { "start_battle", "trainer", "RUNNING_SHOES_THIEF", 1 },
 
-                -- Protección obligatoria: solo marca victoria si ganó
+                { "check_battle_result", "win" },
                 { "jump_if_false", "battle_failed" },
                 { "running_shoes:set_stage", 2 },
                 { "give_item", "RUNNING_SHOES_STOLEN", 1 },

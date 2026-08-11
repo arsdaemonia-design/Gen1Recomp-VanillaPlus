@@ -2,10 +2,9 @@
 
 [🇬🇧 English](#english) | [🇪🇸 Español](#español)
 
----
 Vanilla+ v0.3.0 — Extra Version
 What's New
-🔵 Squirtle Quest completed — Added the second Starter quest to Vanilla+.
+🔵 Squirtle Quest completed — A new Starter quest beginning in Cerulean City, connected to Misty's story area.
 ✍️ Improved quest dialogue — Text has been refined for a more natural and polished experience.
 💬 Slower text speed — Dialogue now displays at a more comfortable reading pace.
 ⏎ A Button line breaks — Press A to advance dialogue and trigger line breaks when appropriate.

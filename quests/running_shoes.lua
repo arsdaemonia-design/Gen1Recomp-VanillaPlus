@@ -311,4 +311,16 @@ return function(mod)
 
         return next(frames, ctx)
     end)
+
+    -- =========================================================================
+    -- 9. CONTRATO PARA EL ORQUESTADOR (QuestConnector)
+    -- =========================================================================
+    mod.quests.register("running_shoes", {
+        stage = function()
+            return stage()
+        end,
+        completed = function()
+            return stage() >= 3
+        end,
+    })
 end

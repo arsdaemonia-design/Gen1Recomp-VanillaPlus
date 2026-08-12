@@ -2100,4 +2100,14 @@ return function(mod)
         )
     end)
 
+    -- Contrato para el orquestador (QuestConnector)
+    mod.quests.register("squirtle", {
+        stage = function()
+            return getState(STAGE_KEY, 0)
+        end,
+        completed = function()
+            return getState(STAGE_KEY, 0) >= 4
+        end,
+    })
+
 end

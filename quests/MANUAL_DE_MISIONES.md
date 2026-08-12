@@ -28,6 +28,8 @@ El objetivo es que puedas crear una misión nueva copiando uno de estos dos como
 16. [Registro en el diario (quest_system)](#16-registro-en-el-diario)
 17. [Errores clásicos y su solución](#17-errores-clásicos)
 18. [Plantilla mínima para tu propia misión](#18-plantilla-mínima)
+19. [QuestConnector — estado entre misiones](#19-questconnector--estado-entre-misiones)
+20. [Índice de objetos por mapa](#20-índice-de-objetos-por-mapa)
 
 ---
 
@@ -878,6 +880,58 @@ return function(mod)
     })
 end
 ```
+
+---
+
+## 19. QuestConnector — estado entre misiones
+
+`quests/state.lua` (cargado **antes** que cualquier quest por `main.lua`)
+instala `mod.quests`: un registro central de contratos. Cada quest sigue
+guardando su estado en `mod.save` con sus propias keys — el conector **no
+guarda nada**, solo expone lecturas:
+
+```lua
+mod.quests.registered("squirtle")   -- true si la quest se registró
+mod.quests.stage("squirtle")        -- número de etapa (o nil si no existe)
+mod.quests.completed("squirtle")    -- true/false
+mod.quests.active("squirtle")       -- true si stage > 0 (ya arrancó)
+```
+
+Las quests existentes ya se registran al final de su archivo:
+
+| id | umbral de `completed` |
+|----|-----------------------|
+| `running_shoes` | stage >= 3 |
+| `bulbasaur` | stage >= 3 |
+| `squirtle` | stage >= 4 |
+
+Para registrar una quest nueva (al final de tu archivo, dentro del closure):
+
+```lua
+mod.quests.register("mi_quest", {
+    stage = function()
+        return getState(STAGE_KEY, 0)
+    end,
+    completed = function()
+        return getState(STAGE_KEY, 0) >= 3
+    end,
+})
+```
+
+**Regla de oro**: una quest nunca asume que otra existe. Si necesitas el
+estado de otra, pregunta por `mod.quests` y comprueba `registered()` antes de
+actuar. Cuando una quest dependa de otra, el conector de esa quest (no la
+quest de origen) decide el gating.
+
+---
+
+## 20. Índice de objetos por mapa
+
+Consulta **`INDEX_DE_OBJETOS.md`** (en esta misma carpeta) antes de parchear
+cualquier mapa, registrar comandos/textos o crear keys de estado. Ahí está la
+tabla de índices por mapa (CERULEAN_CITY, ROUTE_24/25, ROUTE_3, PEWTER_CITY,
+VIRIDIAN_FOREST, VIRIDIAN_MART, ROUTE_2) y las convenciones de nombres para
+no pisar a las misiones existentes.
 
 ---
 

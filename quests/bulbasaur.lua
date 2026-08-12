@@ -1626,4 +1626,14 @@ return function(mod)
         )
     end)
 
+    -- Contrato para el orquestador (QuestConnector)
+    mod.quests.register("bulbasaur", {
+        stage = function()
+            return getState(STAGE_KEY, 0)
+        end,
+        completed = function()
+            return getState(STAGE_KEY, 0) >= 3
+        end,
+    })
+
 end

@@ -34,6 +34,9 @@ return function(mod)
         end
     end
 
+    -- QuestConnector: debe cargarse ANTES que cualquier quest
+    loadQuest("quests/state.lua")
+
     -- Quest 1: Running Shoes (mision original de vanilla-plus)
     loadQuest("quests/running_shoes.lua")
 

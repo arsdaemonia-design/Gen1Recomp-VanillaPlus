@@ -471,6 +471,12 @@ mod.content.maps:patch("ROUTE_25", {
 - `place_npc` mueve **al instante** un objeto ya existente; no lo muestra.
   Para mostrarlo y moverlo al mismo "lugar", usa `show_object` + `place_npc`
   (ver escena de los oficiales en squirtle.lua:855-885).
+- **OJO (trampa clásica)**: un objeto definido **sin** `hidden` es visible
+  siempre. Si lo ocultas con `hide_object` y el jugador sale y vuelve a
+  entrar al mapa, **vuelve a aparecer** (la definición manda al recargar).
+  El `onEnter` debe restaurar su estado: mostrar si aún no está vencido,
+  ocultar si ya lo está. Así lo hacen los perseguidores de squirtle
+  (ROUTE_24:1038+, ROUTE_25:1246+).
 
 ---
 
@@ -553,24 +559,36 @@ Todos son arrays Lua: `{ verbo, arg1, arg2, ... }`.
 
 ## 12. onEnter, onStep, talk
 
-### onEnter (squirtle.lua:1150-1246, bulbasaur.lua:745-800)
+### onEnter (squirtle.lua:1038 ROUTE_24, 1246+ ROUTE_25; bulbasaur.lua:745-800)
 
 Se ejecuta **al entrar al mapa**. Uso típico:
 
 ```lua
 onEnter = function(game, ow)
     local stage = getState(STAGE_KEY, 0)
-    if stage ~= 2 and stage ~= 3 then
+    if stage < 2 then
         return                       -- fuera de la ventana de la misión
     end
 
     local rows = {}                  -- construimos comandos dinámicamente
 
     if stage == 2 then
-        if not rivalBeaten("rival2_beat") then
-            table.insert(rows, { "show_object", "ROUTE_25", "..." })
+        -- Los perseguidores se definen SIN `hidden`: quedan VISIBLES y
+        -- parados en el mapa desde el stage 0.  Al reentrar hay que
+        -- restaurar su estado (visible si no se venció, oculto si ya se
+        -- le ganó), porque `hide_object` no persiste al recargar el mapa.
+        if rivalBeaten("rival2_beat") then
+            table.insert(rows, { "hide_object", "ROUTE_25", "STARTER_STORIES_SQUIRTLE_RIVAL2" })
+        else
+            table.insert(rows, { "show_object", "ROUTE_25", "STARTER_STORIES_SQUIRTLE_RIVAL2" })
         end
-        -- ...
+        -- ...WILD, GUARDIAN, FINAL (estos sí van con `hidden = true`)...
+    elseif stage == 3 then
+        -- persecución terminada: los rivales desaparecen para siempre,
+        -- entran JENNY y los escoltas.
+        table.insert(rows, { "hide_object", "ROUTE_25", "..." })
+    else
+        -- stage >= 4: misión terminada, solo queda la oficial JENNY.
     end
 
     ow:queueScript(rows)             -- los ejecuta al refrescar
@@ -785,6 +803,8 @@ end)
 | **Texto en inglés aunque hay español** | El mod de español no está activo, o editaste con `content:register` en `game.ready` | Usar mutación `text._X = ...` en `game.ready` |
 | **Hablas al NPC y no pasa nada** | Falta handler en `talk` con el `name` exacto | Coincidir `text` del objeto con la key de `talk` |
 | **El pokémon desaparece al derrotarlo** | `hide_object` incondicional tras batalla | Verificar el resultado (`check_battle_result caught`) antes de ocultar |
+| **El rival "resucita" al reentrar al mapa** | Objeto definido sin `hidden` y ocultado solo con `hide_object` | Restaurar su estado en `onEnter` (mostrar si no está vencido, ocultar si ya lo está) |
+| **NPC no voltea hacia el jugador** | `face_player` en un script sin `ctx.npc` (onEnter, onStep, `queueScript`) | Usar `face_object index dir` con la dirección hacia el jugador |
 
 ---
 

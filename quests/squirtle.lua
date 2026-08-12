@@ -428,6 +428,14 @@ return function(mod)
         "of that little SQUIRTLE."
     )
 
+    mod.content.text:register(
+        "_SquirtleJennyRepeat",
+        "We must\n" ..
+        "investigate all\n" ..
+        "of this very\n" ..
+        "carefully."
+    )
+
     -- =========================================================================
     -- 6. ESPAÑOL EN RUNTIME
     -- =========================================================================
@@ -566,6 +574,11 @@ return function(mod)
         text._SquirtleJenny7 =
             "Jenny: Por ahora, cuida bien\n" ..
             "de ese pequeño SQUIRTLE."
+
+        text._SquirtleJennyRepeat =
+            "Debemos\n" ..
+            "investigar muy\n" ..
+            "bien todo esto."
     end)
 
     -- =========================================================================
@@ -723,8 +736,8 @@ return function(mod)
                     name = "STARTER_STORIES_SQUIRTLE_JENNY",
                     text = "TEXT_STARTER_STORIES_SQUIRTLE_JENNY",
                     sprite = "SPRITE_GUARD",
-                    x = 54,
-                    y = 10,
+                    x = 44,
+                    y = 5,
                     movement = "STAY",
                     range = "UP",
                     hidden = true,
@@ -735,8 +748,8 @@ return function(mod)
                     name = "STARTER_STORIES_SQUIRTLE_ESCORT1",
                     text = "TEXT_STARTER_STORIES_SQUIRTLE_ESCORT1",
                     sprite = "SPRITE_GUARD",
-                    x = 54,
-                    y = 11,
+                    x = 44,
+                    y = 6,
                     movement = "STAY",
                     range = "UP",
                     hidden = true,
@@ -747,8 +760,8 @@ return function(mod)
                     name = "STARTER_STORIES_SQUIRTLE_ESCORT2",
                     text = "TEXT_STARTER_STORIES_SQUIRTLE_ESCORT2",
                     sprite = "SPRITE_GUARD",
-                    x = 54,
-                    y = 12,
+                    x = 44,
+                    y = 7,
                     movement = "STAY",
                     range = "UP",
                     hidden = true,
@@ -1581,8 +1594,9 @@ return function(mod)
                     },
 
                     -- Jenny viene desde el pasillo sur (X54 Y10) hacia el
-                    -- norte, acompañada de dos oficiales.  Asciende hasta
-                    -- Y5 y se voltea hacia Y4 (la celda del SQUIRTLE).
+                    -- norte, acompañada de dos oficiales.  Es la jefa:
+                    -- avanza UN PASO más que los escoltas (hasta Y4, la
+                    -- celda del SQUIRTLE).  Los escoltas quedan en Y6/Y7.
                     -- INDICES  PATCH OBJECTS:
                     --   96 = JENNY, 97 = ESCORT1, 98 = ESCORT2
                     { "show_object",
@@ -1602,38 +1616,38 @@ return function(mod)
 
                     { "move_npc",
                         96,
-                        "up",
-                        5
+                        "right",
+                        6
                     },
 
                     { "move_npc",
                         97,
-                        "up",
-                        5
+                        "right",
+                        6
                     },
 
                     { "move_npc",
                         98,
-                        "up",
-                        5
+                        "right",
+                        6
                     },
 
-                    -- Jenny se voltea hacia Y4; los escoltas la acompañan
-                    -- mirando igual (facing up).  El runner no tiene ctx.npc
-                    -- propio aquí, así que giramos explícitamente a cada uno.
+                    -- Los tres se voltean hacia la DERECHA (este).  El
+                    -- runner no tiene ctx.npc propio aquí, así que giramos
+                    -- explícitamente a cada uno.
                     { "face_object",
                         96,
-                        "up"
+                        "right"
                     },
 
                     { "face_object",
                         97,
-                        "up"
+                        "right"
                     },
 
                     { "face_object",
                         98,
-                        "up"
+                        "right"
                     },
 
                     { "show_text",
@@ -1664,13 +1678,31 @@ return function(mod)
                         "_SquirtleJenny7"
                     },
 
-                    { "squirtle:set_stage",
+                    -- Los escoltas regresan por el pasillo sur por donde
+                    -- vinieron y se van.  La oficial JENNY se queda en su
+                    -- puesto (Y4), de cara a la derecha.
+                    { "move_npc",
+                        97,
+                        "left",
                         4
                     },
 
-                    { "hide_object",
-                        "ROUTE_25",
-                        "STARTER_STORIES_SQUIRTLE_JENNY"
+                    { "move_npc",
+                        98,
+                        "left",
+                        4
+                    },
+
+                    { "move_npc",
+                        97,
+                        "down",
+                        5
+                    },
+
+                    { "move_npc",
+                        98,
+                        "down",
+                        5
                     },
 
                     { "hide_object",
@@ -1681,6 +1713,10 @@ return function(mod)
                     { "hide_object",
                         "ROUTE_25",
                         "STARTER_STORIES_SQUIRTLE_ESCORT2"
+                    },
+
+                    { "squirtle:set_stage",
+                        4
                     },
 
                     { "play_default_music" },
@@ -1929,30 +1965,7 @@ return function(mod)
             TEXT_STARTER_STORIES_SQUIRTLE_JENNY = {
                 { "face_player" },
 
-                { "show_text", "_SquirtleJenny1" },
-                { "show_text", "_SquirtleJenny2" },
-                { "show_text", "_SquirtleJenny3" },
-                { "show_text", "_SquirtleJenny4" },
-                { "show_text", "_SquirtleJenny5" },
-                { "show_text", "_SquirtleJenny6" },
-                { "show_text", "_SquirtleJenny7" },
-
-                { "squirtle:set_stage", 4 },
-
-                { "hide_object",
-                    "ROUTE_25",
-                    "STARTER_STORIES_SQUIRTLE_JENNY"
-                },
-
-                { "hide_object",
-                    "ROUTE_25",
-                    "STARTER_STORIES_SQUIRTLE_ESCORT1"
-                },
-
-                { "hide_object",
-                    "ROUTE_25",
-                    "STARTER_STORIES_SQUIRTLE_ESCORT2"
-                },
+                { "show_text", "_SquirtleJennyRepeat" },
             },
 
             TEXT_STARTER_STORIES_SQUIRTLE_ESCORT1 = {

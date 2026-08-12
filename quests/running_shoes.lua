@@ -165,32 +165,46 @@ return function(mod)
     mod.content.map_scripts:register("VIRIDIAN_MART", {
         talk = {
             TEXT_VIRIDIANMART_CLERK = {
-                -- A) Si ya completó la misión → tienda normal
-                { "running_shoes:check_stage", 3 },
-                { "jump_if_true", "vanilla_shop" },
+                -- El recado de Oak manda ANTES que todo: mientras el jugador
+                -- lleve el CORREO-OAK sin entregar, la tienda queda cerrada
+                -- igual que vanilla ("saluda a Oak").  Abrirla antes haría
+                -- comprar POKé BALLs de Ruta 1 y atrapa Pokémon, y Oak en su
+                -- laboratorio rechaza dar la Pokédex si el bolsillo ya guarda
+                -- una (check_item POKE_BALL → come_see).  Eso rompía el
+                -- recado completo.
+                { "check_flag", "EVENT_OAK_GOT_PARCEL" },
+                { "jump_if_true", "errand_done" },
 
-                -- B) Si ya tiene la recompensa en el inventario → tienda normal
-                { "check_item", "RUNNING_SHOES" },
-                { "jump_if_true", "vanilla_shop" },
-
-                -- C) Si la escena ya se inició → tienda normal (la víctima maneja el resto)
-                { "running_shoes:check_stage", 1 },
-                { "jump_if_true", "vanilla_shop" },
-
-                -- D) FLUJO VANILLA DEL PARCEL (solo para partidas nuevas que aún no lo tienen)
                 { "check_flag", "EVENT_GOT_OAKS_PARCEL" },
-                { "jump_if_true", "start_shoes_scene" },
+                { "jump_if_true", "say_hi_to_oak" },
 
-                -- Si no tiene el paquete de Oak y ya tiene starter → flujo vanilla
+                -- Sin paquete aún: sin starter → tienda normal (vanilla);
+                -- con starter → entrega el paquete y NO abre la tienda.
                 { "check_flag", "EVENT_GOT_STARTER" },
                 { "jump_if_false", "vanilla_shop" },
 
-                { "show_text", "TEXT_VIRIDIANMART_CLERK" },
+                { "show_text", "_ViridianMartClerkYouCameFromPalletTownText" },
                 { "give_item", "OAKS_PARCEL", 1 },
                 { "set_flag", "EVENT_GOT_OAKS_PARCEL" },
                 { "jump", "end" },
 
-                -- E) INICIO DE LA ESCENA DE ZAPATILLAS (retrocompatible)
+                { "label", "say_hi_to_oak" },
+                { "show_text", "_ViridianMartClerkSayHiToOakText" },
+                { "jump", "end" },
+
+                -- Recado ya cumplido (OAK recibió el paquete): la tienda
+                -- puede abrir.  La primera vez aquí dispara la escena de
+                -- zapatillas; después, tienda normal.
+                { "label", "errand_done" },
+                { "running_shoes:check_stage", 3 },
+                { "jump_if_true", "vanilla_shop" },
+
+                { "check_item", "RUNNING_SHOES" },
+                { "jump_if_true", "vanilla_shop" },
+
+                { "running_shoes:check_stage", 0 },
+                { "jump_if_false", "vanilla_shop" },
+
                 { "label", "start_shoes_scene" },
                 { "running_shoes:set_stage", 1 },
                 { "show_object", "VIRIDIAN_MART", "RUNNING_SHOES_VICTIM" },

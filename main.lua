@@ -46,5 +46,11 @@ return function(mod)
     -- Quest 3: The Problematic Squirtle / El Squirtle Problematico
     loadQuest("quests/squirtle.lua")
 
+    -- Quest 4: The Scared Kid / El Chico Asustado (Charmander)
+    loadQuest("quests/charmander.lua")
+
+    -- Independent NPC + Charmander followers for the quest.
+    loadQuest("quests/charmander_follower.lua")
+
     mod.log:info("==> vanilla-plus: all quests loaded")
 end

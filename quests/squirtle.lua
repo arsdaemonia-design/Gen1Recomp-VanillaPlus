@@ -1209,7 +1209,17 @@ return function(mod)
 
             local stage = getState(STAGE_KEY, 0)
 
-            if stage ~= 2 and stage ~= 3 then
+            -- Self-heal: versiones previas marcaban stage 3 al atrapar al
+            -- Squirtle y solo pasaban a 4 al terminar la cinemática de Jenny;
+            -- si se guardaba/salía a mitad, la quest quedaba sin salida.
+            -- Ahora el completado (stage 4) se fija en el catch y stage 3 solo
+            -- puede venir de un save antiguo: se completa en la primera entrada.
+            if stage == 3 then
+                setState(STAGE_KEY, 4)
+                stage = 4
+            end
+
+            if stage ~= 2 and stage ~= 4 then
                 return
             end
 
@@ -1247,11 +1257,15 @@ return function(mod)
                     })
                 end
 
-                table.insert(rows, {
-                    "show_object",
-                    "ROUTE_25",
-                    "STARTER_STORIES_SQUIRTLE_GUARDIAN"
-                })
+                -- M1: el guardián no debe resucitar al reentrar tras ser
+                -- vencido (mismo patrón que los rivales).
+                if not rivalBeaten("guardian_beat") then
+                    table.insert(rows, {
+                        "show_object",
+                        "ROUTE_25",
+                        "STARTER_STORIES_SQUIRTLE_GUARDIAN"
+                    })
+                end
 
                 table.insert(rows, {
                     "show_object",
@@ -1259,24 +1273,27 @@ return function(mod)
                     "STARTER_STORIES_SQUIRTLE_FINAL"
                 })
 
-            elseif stage == 3 then
+            elseif stage == 4 then
+
+                -- Completada: la oficial se queda en la zona, pero no quedan
+                -- ni el guardián ni el Squirtle final visibles (limpia también
+                -- el caso borde del respaldo pokemon.caught).
+                table.insert(rows, {
+                    "hide_object",
+                    "ROUTE_25",
+                    "STARTER_STORIES_SQUIRTLE_GUARDIAN"
+                })
+
+                table.insert(rows, {
+                    "hide_object",
+                    "ROUTE_25",
+                    "STARTER_STORIES_SQUIRTLE_FINAL"
+                })
 
                 table.insert(rows, {
                     "show_object",
                     "ROUTE_25",
                     "STARTER_STORIES_SQUIRTLE_JENNY"
-                })
-
-                table.insert(rows, {
-                    "show_object",
-                    "ROUTE_25",
-                    "STARTER_STORIES_SQUIRTLE_ESCORT1"
-                })
-
-                table.insert(rows, {
-                    "show_object",
-                    "ROUTE_25",
-                    "STARTER_STORIES_SQUIRTLE_ESCORT2"
                 })
 
             end
@@ -1586,7 +1603,7 @@ return function(mod)
                     },
 
                     { "squirtle:set_stage",
-                        3
+                        4
                     },
 
                     { "show_text",
@@ -2003,7 +2020,7 @@ return function(mod)
             return
         end
 
-        setState(STAGE_KEY, 3)
+        setState(STAGE_KEY, 4)
     end)
 
     -- =========================================================================

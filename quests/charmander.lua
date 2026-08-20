@@ -60,9 +60,6 @@ return function(mod)
         return not not (flags and flags.EVENT_GOT_STARTER)
     end
 
-    local cachedShouldLight = false
-    local lastCheckedStage = nil
-
     local function hasCharmanderLine(game)
         local party = game and game.save and game.save.party or {}
         for _, mon in ipairs(party) do
@@ -89,13 +86,12 @@ return function(mod)
     end
 
     local function shouldCharmanderLight(game)
+        -- Solo ilumina la cueva si hay un Charmander (o evolución) EN LA PARTY
+        -- activa. Fijarlo en la caja / soltarlo apaga la luz y detiene las
+        -- emboscadas (consistente con el follower). Sin caché por stage: la
+        -- party puede cambiar sin que cambie el stage.
         local stage = getState(STAGE_KEY, 0)
-        if stage == lastCheckedStage then
-            return cachedShouldLight
-        end
-        lastCheckedStage = stage
-        cachedShouldLight = (stage >= 4 and stage < 5) or (stage >= 3 and stage < 5 and hasCharmanderLine(game))
-        return cachedShouldLight
+        return stage >= 3 and stage < 5 and hasCharmanderLine(game)
     end
 
 
@@ -521,7 +517,8 @@ return function(mod)
     -- "!" de sorpresa, grito, carrera hasta tu lado y batalla salvaje. Si no
     -- las atrapas quedan "disturbadas" (no re-aggro en la misma visita).
     local function tryAmbush(game, ow, mapId, x, y)
-        if getState(STAGE_KEY, 0) ~= 4 or ow.runner:isRunning() then
+        if getState(STAGE_KEY, 0) ~= 4 or ow.runner:isRunning()
+            or not hasCharmanderLine(game) then
             return false
         end
         local bestI, bestAmbush, bestDist
@@ -575,6 +572,7 @@ return function(mod)
     -- justo antes de la escalera hacia ROUTE_10. Solo con stage 4 y una vez.
     local function tryFarewell(game, ow, x, y)
         if getState(STAGE_KEY, 0) ~= 4 then return false end
+        if not hasCharmanderLine(game) then return false end
         if getState(FAREWELL_KEY, false) then return false end
         if x < 14 or x > 16 or y < 31 or y > 35 then return false end
         if ow.runner:isRunning() then return false end

@@ -1,7 +1,7 @@
 {
   "id": "vanilla-plus",
   "name": "Vanilla+",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "api": 2,
   "entry": "main.lua",
   "profile": "content",
@@ -14,6 +14,6 @@
   "conflicts": [],
   "incompatible": [],
   "experimental": false,
-  "description": "Proyecto en crecimiento para expandir la historia. Actualmente incluye la misión de los Zapatos Robados.",
+  "description": "Proyecto en crecimiento para expandir la historia. Incluye 6 misiones: Running Shoes, Bulbasaur perdido, Squirtle problemático, Charmander (Túnel Roca), el misterio de Lavanda y las emboscadas de Team Rocket.",
   "github": "arsdaemonia-design/Gen1Recomp-VanillaPlus"
 }

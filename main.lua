@@ -52,5 +52,11 @@ return function(mod)
     -- Independent NPC + Charmander followers for the quest.
     loadQuest("quests/charmander_follower.lua")
 
+    -- Quest 5: Lavender Town / Daría (Lavender)
+    loadQuest("quests/lavender.lua")
+
+    -- Quest 6: Rocket Ambushes (post-finale de Lavender, TODAS las rutas)
+    loadQuest("quests/rocket_ambush.lua")
+
     mod.log:info("==> vanilla-plus: all quests loaded")
 end
